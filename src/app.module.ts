@@ -26,6 +26,12 @@ import { PhotoModule } from './photo/photo.module';
 import { Photo } from './photo/entities/photo.entity';
 import { ItineraryModule } from './itinerary/itinerary.module';
 import { Itinerary } from './itinerary/entities/itinerary.entity';
+import { CompanyModule } from './company/company.module';
+import { Company } from './company/entities/company.entity';
+import { TransportationModule } from './transportation/transportation.module';
+import { Transportation } from './transportation/entities/transportation.entity';
+import { StopModule } from './stop/stop.module';
+import { Stop } from './stop/entities/stop.entity';
 
 @Module({
   imports: [
@@ -49,6 +55,9 @@ import { Itinerary } from './itinerary/entities/itinerary.entity';
         City,
         Photo,
         Itinerary,
+        Company,
+        Transportation,
+        Stop,
       ],
       synchronize: false,
       logging: true,
@@ -65,6 +74,9 @@ import { Itinerary } from './itinerary/entities/itinerary.entity';
     CityModule,
     PhotoModule,
     ItineraryModule,
+    CompanyModule,
+    TransportationModule,
+    StopModule,
   ],
   controllers: [AppController],
   providers: [AppService],

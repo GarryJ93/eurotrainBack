@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Itinerary } from 'src/itinerary/entities/itinerary.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class TransportType {
@@ -7,4 +8,7 @@ export class TransportType {
 
   @Column()
   name: string;
+
+  @ManyToMany(() => Itinerary, (itinerary) => itinerary.type)
+  itinerary?: Itinerary[];
 }

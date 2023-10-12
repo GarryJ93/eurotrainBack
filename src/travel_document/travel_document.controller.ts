@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { TravelDocumentService } from './travel_document.service';
 import { CreateTravelDocumentDto } from './dto/create-travel_document.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('travel-document')
+@ApiTags('Travel-document')
 export class TravelDocumentController {
   constructor(private readonly travelDocumentService: TravelDocumentService) {}
 

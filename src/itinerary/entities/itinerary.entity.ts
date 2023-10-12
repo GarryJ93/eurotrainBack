@@ -1,5 +1,6 @@
 import { City } from 'src/city/entities/city.entity';
 import { TransportCompany } from 'src/transport_company/entities/transport_company.entity';
+import { TransportType } from 'src/transport_type/entities/transport_type.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -57,4 +58,38 @@ export class Itinerary {
     },
   })
   company?: TransportCompany[];
+
+  @ManyToMany(() => TransportType, (type) => type.itinerary, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinTable({
+    name: 'transportation',
+    joinColumn: {
+      name: 'id_itinerary',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'id_transport_type',
+      referencedColumnName: 'id',
+    },
+  })
+  type?: TransportType[];
+
+  @ManyToMany(() => City, (cityStop) => cityStop.itinerary, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinTable({
+    name: 'stop',
+    joinColumn: {
+      name: 'id_itinerary',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'id_city',
+      referencedColumnName: 'id',
+    },
+  })
+  cityStop?: City[];
 }

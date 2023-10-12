@@ -1,7 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { TransportCompanyService } from './transport_company.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('transport-company')
+@ApiTags('Transport-company')
 export class TransportCompanyController {
   constructor(
     private readonly transportCompanyService: TransportCompanyService,

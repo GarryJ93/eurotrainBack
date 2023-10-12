@@ -6,6 +6,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -48,4 +49,7 @@ export class City {
   @OneToMany(() => Itinerary, (arrival) => arrival.destinationCity)
   @JoinColumn({ name: 'id_origin_city' })
   arrival: Itinerary;
+
+  @ManyToMany(() => Itinerary, (itinerary) => itinerary.cityStop)
+  itinerary?: Itinerary[];
 }

@@ -9,9 +9,11 @@ import {
 } from '@nestjs/common';
 import { ItineraryService } from './itinerary.service';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
+import { ApiTags } from '@nestjs/swagger';
 // import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 
 @Controller('itinerary')
+@ApiTags('Itinerary')
 export class ItineraryController {
   constructor(private readonly itineraryService: ItineraryService) {}
 
