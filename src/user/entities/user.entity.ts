@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Itinerary } from 'src/itinerary/entities/itinerary.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -22,4 +29,8 @@ export class User {
 
   @Column()
   full_access: boolean;
+
+  @OneToMany(() => Itinerary, (itinerary) => itinerary.creator)
+  @JoinColumn({ name: 'id_user' })
+  itinerary: Itinerary;
 }
