@@ -17,12 +17,4 @@ export class TransportationService {
     const result = await this.transportationRepository.save(newTransportation);
     return result;
   }
-
-  findAll() {
-    return `This action returns all transportation`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} transportation`;
-  }
 }

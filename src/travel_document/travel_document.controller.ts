@@ -9,6 +9,7 @@ export class TravelDocumentController {
   constructor(private readonly travelDocumentService: TravelDocumentService) {}
 
   @Post()
+  // @UseGuards(AuthGuard('jwt'))
   create(@Body() createTravelDocumentDto: CreateTravelDocumentDto) {
     return this.travelDocumentService.create(createTravelDocumentDto);
   }
@@ -24,6 +25,7 @@ export class TravelDocumentController {
   }
 
   @Delete(':id')
+  // @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.travelDocumentService.remove(+id);
   }

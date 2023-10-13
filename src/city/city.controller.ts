@@ -9,6 +9,7 @@ export class CityController {
   constructor(private readonly cityService: CityService) {}
 
   @Post()
+  // @UseGuards(AuthGuard('jwt'))
   create(@Body() createCityDto: CreateCityDto) {
     return this.cityService.create(createCityDto);
   }
@@ -24,6 +25,7 @@ export class CityController {
   }
 
   @Delete(':id')
+  // @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.cityService.remove(+id);
   }

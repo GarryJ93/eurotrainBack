@@ -9,6 +9,7 @@ export class CurrencyController {
   constructor(private readonly currencyService: CurrencyService) {}
 
   @Post()
+  // @UseGuards(AuthGuard('jwt'))
   create(@Body() createCurrencyDto: CreateCurrencyDto) {
     return this.currencyService.create(createCurrencyDto);
   }
@@ -24,6 +25,7 @@ export class CurrencyController {
   }
 
   @Delete(':id')
+  // @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.currencyService.remove(+id);
   }

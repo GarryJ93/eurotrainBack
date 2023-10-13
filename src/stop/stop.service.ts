@@ -15,12 +15,4 @@ export class StopService {
     const result = await this.stopRepository.save(newStop);
     return result;
   }
-
-  findAll() {
-    return `This action returns all stop`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} stop`;
-  }
 }
