@@ -18,7 +18,7 @@ export class ItineraryController {
   constructor(private readonly itineraryService: ItineraryService) {}
 
   @Post()
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   create(@Body() createItineraryDto: CreateItineraryDto) {
     return this.itineraryService.create(createItineraryDto);
   }
@@ -42,7 +42,7 @@ export class ItineraryController {
   // }
 
   @Delete(':id')
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   remove(@Param('id') id: string) {
     return this.itineraryService.remove(+id);
   }

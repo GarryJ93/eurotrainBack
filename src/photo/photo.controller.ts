@@ -19,7 +19,7 @@ export class PhotoController {
 
   @Post()
   @UseInterceptors(FileInterceptor('monFichier'))
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   uploadImage(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
     return this.photoService.create(file);

@@ -9,7 +9,7 @@ export class LanguageController {
   constructor(private readonly languageService: LanguageService) {}
 
   @Post()
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   create(@Body() createLanguageDto: CreateLanguageDto) {
     return this.languageService.create(createLanguageDto);
   }
@@ -25,7 +25,7 @@ export class LanguageController {
   }
 
   @Delete(':id')
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   remove(@Param('id') id: string) {
     return this.languageService.remove(+id);
   }

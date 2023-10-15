@@ -9,7 +9,7 @@ export class StopController {
   constructor(private readonly stopService: StopService) {}
 
   @Post()
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   create(@Body() createStopDto: CreateStopDto) {
     return this.stopService.create(createStopDto);
   }

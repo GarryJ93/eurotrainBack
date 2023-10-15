@@ -9,7 +9,7 @@ export class TransportationController {
   constructor(private readonly transportationService: TransportationService) {}
 
   @Post()
-  // @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   create(@Body() createTransportationDto: CreateTransportationDto) {
     return this.transportationService.create(createTransportationDto);
   }

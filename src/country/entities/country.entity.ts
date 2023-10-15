@@ -58,6 +58,6 @@ export class Country {
   city: City;
 
   @OneToMany(() => Photo, (photo) => photo.country, { eager: true })
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'id_country' })
   photo: Photo;
 }

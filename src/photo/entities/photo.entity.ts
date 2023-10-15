@@ -29,10 +29,10 @@ export class Photo {
   id_country: number;
 
   @ManyToOne(() => Country, (country) => country.photo)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'id_country' })
   country: Country;
 
   @ManyToOne(() => City, (city) => city.photo)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'id_city' })
   city: City;
 }

@@ -39,7 +39,7 @@ export class City {
   cat: StayCat;
 
   @OneToMany(() => Photo, (photo) => photo.city, { eager: true })
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'id_photo' })
   photo: Photo;
 
   @OneToMany(() => Itinerary, (departure) => departure.originCity)
