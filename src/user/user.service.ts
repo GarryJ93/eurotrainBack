@@ -36,6 +36,7 @@ export class UserService {
       password: updateUserDto.password,
       motivation: updateUserDto.motivation,
       access: updateUserDto.access,
+      delete_at: updateUserDto.delete_at,
       // mettre les propriètés modifiables
     };
 
@@ -55,5 +56,15 @@ export class UserService {
       throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
     }
     return await this.userRepository.remove(userFound);
+  }
+
+  async softDeleteUser(id: number) {
+    const userFound = await this.userRepository.findOneBy({
+      id: id,
+    });
+    if (!userFound) {
+      throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
+    }
+    return await this.userRepository.softRemove(userFound);
   }
 }

@@ -13,4 +13,6 @@ export class CreateUserDto {
   access: boolean;
   @ApiProperty()
   full_access: boolean;
+  @ApiProperty()
+  delete_at: Date;
 }

@@ -11,12 +11,18 @@ export class PhotoService {
     @InjectRepository(Photo)
     private photoRepository: Repository<Photo>,
   ) {}
-  create(img: Express.Multer.File) {
-    console.log('notre img' + img.originalname);
-    return this.photoRepository.save({
-      name: img.filename,
-      mimetype: img.mimetype,
-      size: img.size,
+  async create(body: {
+    file: Express.Multer.File;
+    idCity: string;
+    idCountry: string;
+  }) {
+    console.log(body);
+    return await this.photoRepository.save({
+      name: body.file.filename,
+      mimetype: body.file.mimetype,
+      size: body.file.size,
+      id_city: Number(body.idCity) || null,
+      id_country: Number(body.idCountry),
     });
   }
 

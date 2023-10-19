@@ -7,6 +7,7 @@ import {
   UseInterceptors,
   Res,
   StreamableFile,
+  Body,
 } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -20,10 +21,14 @@ export class PhotoController {
   @Post()
   @UseInterceptors(FileInterceptor('monFichier'))
   // @UseGuards(AuthGuard())
-  uploadImage(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
-    return this.photoService.create(file);
+  async uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() body: { idCity: string; idCountry: string },
+  ) {
+    console.log(body, file);
+    return await this.photoService.create({ file, ...body });
   }
+
   @Get(':id')
   getImageById(
     @Param('id') id: string,

@@ -21,6 +21,9 @@ export class Country {
   name: string;
 
   @Column()
+  initial: string;
+
+  @Column()
   schengen: boolean;
 
   @Column()

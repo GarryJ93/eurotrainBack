@@ -38,6 +38,7 @@ export class CountryService {
     const countryUpdated: Partial<Country> = {
       ...countryFound,
       name: updateCountryDto.name,
+      initial: updateCountryDto.initial,
       schengen: updateCountryDto.schengen,
       observation: updateCountryDto.observation,
       id_currency: updateCountryDto.id_currency,

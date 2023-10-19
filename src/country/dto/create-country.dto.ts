@@ -6,6 +6,8 @@ export class CreateCountryDto {
   @ApiProperty()
   name: string;
   @ApiProperty()
+  initial: string;
+  @ApiProperty()
   schengen: boolean;
   @ApiProperty()
   observation: string;

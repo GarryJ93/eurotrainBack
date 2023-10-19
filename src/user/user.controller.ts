@@ -47,4 +47,9 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
+
+  @Delete('/softDelete/:id')
+  softDeleteUser(@Param('id') id: string) {
+    return this.userService.softDeleteUser(+id);
+  }
 }

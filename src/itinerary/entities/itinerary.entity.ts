@@ -33,7 +33,7 @@ export class Itinerary {
   @ManyToOne(() => City, (destinationCity) => destinationCity.departure, {
     eager: true,
   })
-  @JoinColumn({ name: 'id_origin_city' })
+  @JoinColumn({ name: 'id_destination_city' })
   destinationCity: City;
 
   @ManyToOne(() => User, (creator) => creator.itinerary, {
