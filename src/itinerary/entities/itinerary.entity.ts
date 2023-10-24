@@ -77,7 +77,7 @@ export class Itinerary {
   type?: TransportType[];
 
   @ManyToMany(() => City, (cityStop) => cityStop.itinerary, {
-    cascade: true,
+    onDelete: 'CASCADE',
     eager: true,
   })
   @JoinTable({

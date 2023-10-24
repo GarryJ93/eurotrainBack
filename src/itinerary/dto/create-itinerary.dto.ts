@@ -5,17 +5,15 @@ import { TransportType } from 'src/transport_type/entities/transport_type.entity
 
 export class CreateItineraryDto {
   @ApiProperty()
-  id: number;
-  @ApiProperty()
   id_origin_city: number;
   @ApiProperty()
   id_destination_city: number;
   @ApiProperty()
   id_user: number;
   @ApiProperty()
-  companyTab: TransportCompany[];
+  company: TransportCompany[];
   @ApiProperty()
-  transportType: TransportType[];
+  type: TransportType[];
   @ApiProperty()
   cityStop: City[];
 }

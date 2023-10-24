@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateCityDto } from './dto/update-city.dto';
 
 @Controller('city')
 @ApiTags('City')
@@ -22,6 +31,12 @@ export class CityController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.cityService.findOne(+id);
+  }
+
+  @Patch(':id')
+  // @UseGuards(AuthGuard())
+  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+    return this.cityService.update(+id, updateCityDto);
   }
 
   @Delete(':id')

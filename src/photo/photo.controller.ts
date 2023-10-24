@@ -8,6 +8,7 @@ import {
   Res,
   StreamableFile,
   Body,
+  Delete,
 } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -35,5 +36,11 @@ export class PhotoController {
     @Res({ passthrough: true }) res,
   ): Promise<StreamableFile> {
     return this.photoService.findOne(+id, res);
+  }
+
+  @Delete(':id')
+  // @UseGuards(AuthGuard())
+  remove(@Param('id') id: string) {
+    return this.photoService.remove(+id);
   }
 }

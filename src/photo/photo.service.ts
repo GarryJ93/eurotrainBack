@@ -35,7 +35,16 @@ export class PhotoService {
       join(process.cwd(), 'uploads', result.name),
     );
     res.set('Content-Type', result.mimetype);
-    console.log('mon image', imageFile);
     return new StreamableFile(imageFile);
+  }
+
+  async remove(id: number) {
+    const photoFound = await this.photoRepository.findOneBy({
+      id: id,
+    });
+    if (!photoFound) {
+      throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
+    }
+    return await this.photoRepository.remove(photoFound);
   }
 }

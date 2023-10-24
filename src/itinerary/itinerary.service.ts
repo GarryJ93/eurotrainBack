@@ -6,10 +6,10 @@ import { Itinerary } from './entities/itinerary.entity';
 import { Repository } from 'typeorm';
 import { Company } from 'src/company/entities/company.entity';
 import { CreateCompanyDto } from 'src/company/dto/create-company.dto';
-import { CreateTransportationDto } from 'src/transportation/dto/create-transportation.dto';
 import { Transportation } from 'src/transportation/entities/transportation.entity';
 import { Stop } from 'src/stop/entities/stop.entity';
 import { CreateStopDto } from 'src/stop/dto/create-stop.dto';
+import { CreateTransportationDto } from 'src/transportation/dto/create-transportation.dto';
 
 @Injectable()
 export class ItineraryService {
@@ -24,36 +24,60 @@ export class ItineraryService {
     private stopRepository: Repository<Stop>,
   ) {}
   async create(createItineraryDto: CreateItineraryDto) {
+    console.log(createItineraryDto);
     const newWay = this.itineraryRepository.create(createItineraryDto);
     const result = await this.itineraryRepository.save(newWay);
     const id_itinerary = result.id;
-    for (const company of createItineraryDto.companyTab) {
-      const id_transport_company = company.id;
-      console.log(id_transport_company, id_itinerary);
-      const newCompany: CreateCompanyDto = {
-        id_transport_company,
-        id_itinerary,
-      };
-      await this.companyRepository.save(newCompany);
-    }
-    for (const type of createItineraryDto.transportType) {
-      const id_transport_type = type.id;
-      console.log(id_transport_type);
-      const newType: CreateTransportationDto = {
-        id_transport_type,
-        id_itinerary,
-      };
-      await this.transportationRepository.save(newType);
-    }
-    for (const stop of createItineraryDto.cityStop) {
-      const id_city = stop.id;
-      const newStop: CreateStopDto = {
-        id_city,
-        id_itinerary,
-      };
-      await this.stopRepository.save(newStop);
-    }
-    // result.id;
+    console.log('Companies :', createItineraryDto.company);
+    console.log('Types :', createItineraryDto.type);
+    console.log('Stops :', createItineraryDto.cityStop);
+
+    console.log('Avant boucle company');
+    const companyPromises =
+      createItineraryDto.company && createItineraryDto.company.length > 0
+        ? createItineraryDto.company.map(async (company) => {
+            const id_transport_company = company.id;
+            console.log(id_transport_company, id_itinerary);
+            const newCompany: CreateCompanyDto = {
+              id_transport_company,
+              id_itinerary,
+            };
+            console.log('Avant sauvegarde de la company');
+            await this.companyRepository.save(newCompany);
+            console.log('Après sauvegarde de la company');
+          })
+        : [];
+
+    const typePromises =
+      createItineraryDto.type && createItineraryDto.type.length > 0
+        ? createItineraryDto.type.map(async (type) => {
+            const id_transport_type = type.id;
+            console.log(id_transport_type);
+            const newType: CreateTransportationDto = {
+              id_transport_type,
+              id_itinerary,
+            };
+            await this.transportationRepository.save(newType);
+            console.log('Après sauvegarde du type');
+          })
+        : [];
+
+    const stopPromises =
+      createItineraryDto.cityStop && createItineraryDto.cityStop.length > 0
+        ? createItineraryDto.cityStop.map(async (stop) => {
+            const id_city = stop.id;
+            const newStop: CreateStopDto = {
+              id_city,
+              id_itinerary,
+            };
+            await this.stopRepository.save(newStop);
+            console.log('Après sauvegarde des escales');
+          })
+        : [];
+
+    // Attendre que toutes les promesses se résolvent
+    await Promise.all([...companyPromises, ...typePromises, ...stopPromises]);
+
     return result;
   }
 
