@@ -12,6 +12,9 @@ export class TransportCompany {
   @Column()
   link_url: string;
 
+  @Column()
+  logo_url: string;
+
   @ManyToMany(() => Itinerary, (itinerary) => itinerary.company)
   itinerary?: Itinerary[];
 }

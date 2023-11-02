@@ -11,20 +11,20 @@ export class PhotoService {
     @InjectRepository(Photo)
     private photoRepository: Repository<Photo>,
   ) {}
-  async create(body: {
-    file: Express.Multer.File;
-    idCity: string;
-    idCountry: string;
-  }) {
-    console.log(body);
-    return await this.photoRepository.save({
-      name: body.file.filename,
-      mimetype: body.file.mimetype,
-      size: body.file.size,
-      id_city: Number(body.idCity) || null,
-      id_country: Number(body.idCountry),
-    });
-  }
+  // async create(body: {
+  //   file: Express.Multer.File;
+  //   idCity: string;
+  //   idCountry: string;
+  // }) {
+  //   console.log(body);
+  //   return await this.photoRepository.save({
+  //     name: body.file.filename,
+  //     mimetype: body.file.mimetype,
+  //     size: body.file.size,
+  //     id_city: Number(body.idCity) || null,
+  //     id_country: Number(body.idCountry),
+  //   });
+  // }
 
   async findOne(id: number, res): Promise<StreamableFile> {
     const result = await this.photoRepository.findOneBy({ id });
@@ -32,7 +32,7 @@ export class PhotoService {
       throw new NotFoundException(`The photo ${id} is not found !`);
     }
     const imageFile = createReadStream(
-      join(process.cwd(), 'uploads', result.name),
+      join(process.cwd(), 'public/images', result.name),
     );
     res.set('Content-Type', result.mimetype);
     return new StreamableFile(imageFile);

@@ -86,13 +86,13 @@ export class ItineraryService {
   }
 
   async findOne(id: number) {
-    const cityFound = await this.itineraryRepository.findOneBy({
+    const itineraryFound = await this.itineraryRepository.findOneBy({
       id: id,
     });
-    if (!cityFound) {
+    if (!itineraryFound) {
       throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
     }
-    return cityFound;
+    return itineraryFound;
   }
 
   // update(id: number, updateItineraryDto: UpdateItineraryDto) {

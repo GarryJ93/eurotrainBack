@@ -29,8 +29,8 @@ export class ItineraryController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itineraryService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.itineraryService.findOne(id);
   }
 
   // @Patch(':id')

@@ -6,6 +6,8 @@ export class CreateCityDto {
   @ApiProperty()
   name: string;
   @ApiProperty()
+  description: string;
+  @ApiProperty()
   id_country: number;
   @ApiProperty()
   id_stay_cat: number;

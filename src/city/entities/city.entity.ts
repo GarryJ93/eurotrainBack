@@ -21,6 +21,9 @@ export class City {
   name: string;
 
   @Column()
+  description: string;
+
+  @Column()
   id_country: number;
 
   @Column()

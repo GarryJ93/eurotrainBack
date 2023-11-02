@@ -9,6 +9,9 @@ export class TransportType {
   @Column()
   name: string;
 
+  @Column()
+  icon_code: string;
+
   @ManyToMany(() => Itinerary, (itinerary) => itinerary.type)
   itinerary?: Itinerary[];
 }

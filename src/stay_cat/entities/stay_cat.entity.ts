@@ -15,6 +15,9 @@ export class StayCat {
   @Column()
   name: string;
 
+  @Column()
+  icon_code: string;
+
   @OneToMany(() => City, (city) => city.cat)
   @JoinColumn({ name: 'id_stay_cat' })
   city: City;
