@@ -2,7 +2,7 @@ import { Injectable, PipeTransform } from '@nestjs/common';
 import { accessSync } from 'node:fs';
 import * as path from 'path';
 
-import * as sharp from 'sharp';
+import sharp from 'sharp';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Photo } from 'src/photo/entities/photo.entity';
@@ -36,7 +36,7 @@ export class ImagePipe implements PipeTransform<any, Promise<any>> {
 
       console.log('Before Sharp:', body);
       await sharp(image.buffer)
-        .toFormat('webp', { lossless: true, quality: 70 })
+        .toFormat('webp', { lossless: true, quality: 70, effort: 2 })
         .toFile(path.join(pathToSave, filename));
       console.log('After Sharp:', body);
       const savedImage = await this.imageRepository.save({

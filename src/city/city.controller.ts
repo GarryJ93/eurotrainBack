@@ -33,6 +33,11 @@ export class CityController {
     return this.cityService.findOne(+id);
   }
 
+  @Get('country/:id')
+  findOneWithCountry(@Param('id') id: string) {
+    return this.cityService.findOne(+id);
+  }
+
   @Patch(':id')
   // @UseGuards(AuthGuard())
   update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {

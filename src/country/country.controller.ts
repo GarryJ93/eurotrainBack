@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  BadRequestException,
 } from '@nestjs/common';
 import { CountryService } from './country.service';
 import { CreateCountryDto } from './dto/create-country.dto';
@@ -30,7 +31,13 @@ export class CountryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.countryService.findOne(+id);
+    const numericId = +id;
+
+    if (isNaN(numericId)) {
+      throw new BadRequestException("L'ID fourni n'est pas valide.");
+    }
+
+    return this.countryService.findOne(numericId);
   }
 
   @Patch(':id')

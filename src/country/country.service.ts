@@ -22,12 +22,15 @@ export class CountryService {
   }
 
   async findOne(id: number) {
-    const countryFound = await this.countryRepository.findOneBy({
-      id: id,
+    const countryFound = await this.countryRepository.findOne({
+      where: { id },
+      relations: ['photo'],
     });
+
     if (!countryFound) {
       throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
     }
+
     return countryFound;
   }
 

@@ -29,9 +29,7 @@ export class City {
   @Column()
   id_stay_cat: number;
 
-  @ManyToOne(() => Country, (country) => country.city, {
-    eager: true,
-  })
+  @ManyToOne(() => Country, (country) => country.city)
   @JoinColumn({ name: 'id_country' })
   country: Country;
 
@@ -41,7 +39,7 @@ export class City {
   @JoinColumn({ name: 'id_stay_cat' })
   cat: StayCat;
 
-  @OneToMany(() => Photo, (photo) => photo.city, { eager: true })
+  @OneToMany(() => Photo, (photo) => photo.city)
   @JoinColumn({ name: 'id_photo' })
   photo: Photo;
 

@@ -20,12 +20,26 @@ export class CityService {
   }
 
   async findAll() {
-    return await this.cityRepository.find();
+    return await this.cityRepository.find({
+      relations: ['country'],
+    });
   }
 
   async findOne(id: number) {
-    const cityFound = await this.cityRepository.findOneBy({
-      id: id,
+    const cityFound = await this.cityRepository.findOne({
+      where: { id },
+      relations: ['photo', 'country'],
+    });
+    if (!cityFound) {
+      throw new NotFoundException(`L'id numéro ${id} n'existe pas`);
+    }
+    return cityFound;
+  }
+
+  async findOneWithCountry(id: number) {
+    const cityFound = await this.cityRepository.findOne({
+      where: { id },
+      relations: ['country'],
     });
     if (!cityFound) {
       throw new NotFoundException(`L'id numéro ${id} n'existe pas`);

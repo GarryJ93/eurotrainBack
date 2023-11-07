@@ -26,25 +26,20 @@ export class Itinerary {
   @Column()
   id_user: number;
 
-  @ManyToOne(() => City, (originCity) => originCity.departure, { eager: true })
+  @ManyToOne(() => City, (originCity) => originCity.departure)
   @JoinColumn({ name: 'id_origin_city' })
   originCity: City;
 
-  @ManyToOne(() => City, (destinationCity) => destinationCity.departure, {
-    eager: true,
-  })
+  @ManyToOne(() => City, (destinationCity) => destinationCity.departure)
   @JoinColumn({ name: 'id_destination_city' })
   destinationCity: City;
 
-  @ManyToOne(() => User, (creator) => creator.itinerary, {
-    eager: true,
-  })
+  @ManyToOne(() => User, (creator) => creator.itinerary)
   @JoinColumn({ name: 'id_user' })
   creator: User;
 
   @ManyToMany(() => TransportCompany, (company) => company.itinerary, {
     cascade: true,
-    eager: true,
   })
   @JoinTable({
     name: 'company',
@@ -61,7 +56,6 @@ export class Itinerary {
 
   @ManyToMany(() => TransportType, (type) => type.itinerary, {
     cascade: true,
-    eager: true,
   })
   @JoinTable({
     name: 'transportation',
@@ -78,7 +72,6 @@ export class Itinerary {
 
   @ManyToMany(() => City, (cityStop) => cityStop.itinerary, {
     onDelete: 'CASCADE',
-    eager: true,
   })
   @JoinTable({
     name: 'stop',

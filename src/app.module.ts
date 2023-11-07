@@ -32,9 +32,13 @@ import { TransportationModule } from './transportation/transportation.module';
 import { Transportation } from './transportation/entities/transportation.entity';
 import { StopModule } from './stop/stop.module';
 import { Stop } from './stop/entities/stop.entity';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public/images'),
+    }),
     ConfigModule.forRoot({ envFilePath: [`.env`] }),
     TypeOrmModule.forRoot({
       type: 'postgres',

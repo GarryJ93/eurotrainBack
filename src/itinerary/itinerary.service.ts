@@ -82,12 +82,25 @@ export class ItineraryService {
   }
 
   async findAll() {
-    return await this.itineraryRepository.find();
+    return await this.itineraryRepository.find({
+      relations: ['originCity', 'destinationCity'],
+    });
   }
 
   async findOne(id: number) {
-    const itineraryFound = await this.itineraryRepository.findOneBy({
-      id: id,
+    const itineraryFound = await this.itineraryRepository.findOne({
+      where: { id },
+      relations: [
+        'destinationCity',
+        'destinationCity.photo',
+        'destinationCity.country',
+        'originCity',
+        'originCity.country',
+        'cityStop',
+        'cityStop.photo',
+        'type',
+        'company',
+      ],
     });
     if (!itineraryFound) {
       throw new NotFoundException(`L'id numéro ${id} n'existe pas`);

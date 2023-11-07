@@ -60,7 +60,7 @@ export class Country {
   @JoinColumn({ name: 'id_country' })
   city: City;
 
-  @OneToMany(() => Photo, (photo) => photo.country, { eager: true })
+  @OneToMany(() => Photo, (photo) => photo.country)
   @JoinColumn({ name: 'id_country' })
   photo: Photo;
 }
