@@ -6,10 +6,12 @@ import {
   // Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ItineraryService } from './itinerary.service';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 // import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 
 @Controller('itinerary')
@@ -18,7 +20,7 @@ export class ItineraryController {
   constructor(private readonly itineraryService: ItineraryService) {}
 
   @Post()
-  // @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createItineraryDto: CreateItineraryDto) {
     return this.itineraryService.create(createItineraryDto);
   }
@@ -42,7 +44,7 @@ export class ItineraryController {
   // }
 
   @Delete(':id')
-  // @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.itineraryService.remove(+id);
   }

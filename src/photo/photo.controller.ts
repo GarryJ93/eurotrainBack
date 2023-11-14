@@ -9,11 +9,13 @@ import {
   StreamableFile,
   Body,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { ImagePipe } from 'src/pipes/image.pipe';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('photo')
 @ApiTags('Photo')
@@ -35,6 +37,7 @@ export class PhotoController {
   // }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(FileInterceptor('image'))
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
@@ -52,7 +55,7 @@ export class PhotoController {
   }
 
   @Delete(':id')
-  // @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     return this.photoService.remove(+id);
   }

@@ -45,7 +45,7 @@ export class UserService {
     }
     Object.assign(userFound, userUpdated);
     this.userRepository.save(userFound);
-    return userFound;
+    return this.userRepository.find();
   }
 
   async remove(id: number) {
