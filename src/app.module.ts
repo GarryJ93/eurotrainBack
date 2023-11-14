@@ -34,6 +34,9 @@ import { StopModule } from './stop/stop.module';
 import { Stop } from './stop/entities/stop.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ErrorHandlerService } from './services/error-handler/error-handler.service';
+import { APP_FILTER } from '@nestjs/core';
+import { CustomExceptionFilter } from './custom-exception/custom-exception.filter';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -83,6 +86,13 @@ import { join } from 'path';
     StopModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    ErrorHandlerService,
+    {
+      provide: APP_FILTER,
+      useClass: CustomExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

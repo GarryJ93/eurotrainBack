@@ -5,6 +5,8 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import compression from 'compression';
 import express from 'express';
 import path from 'path';
+import { ErrorHandlerService } from './services/error-handler/error-handler.service';
+import { CustomExceptionFilter } from './custom-exception/custom-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,6 +27,10 @@ async function bootstrap() {
   };
   app.use(express.static(path.join(__dirname, 'public/images')));
   app.enableCors(corsOptions);
+  const errorHandlerService = app.get(ErrorHandlerService); // Obtenez l'instance du service
+  const customExceptionFilter = new CustomExceptionFilter(errorHandlerService);
+
+  app.useGlobalFilters(customExceptionFilter);
 
   await app.listen(3000);
 }
